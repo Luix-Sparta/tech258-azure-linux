@@ -72,212 +72,212 @@
 ### Step 1
 Search For SSH keys in azure and click on "SSH keys"
 
-![Step 1](image.png)
+![Step 1](../images/image.png)
 
 ### Step 2
 Click "Create"
 
-![Step 2](image-1.png)
+![Step 2](../images/image-1.png)
 
 ### Step 3
 Choose a subscription
 
-![Step 3](image-2.png)
+![Step 3](../images/image-2.png)
 
 ### Step 4
 Select the resource group "tech258"
-![Step 4](image-3.png)
+![Step 4](../images/image-3.png)
 
 ### Step 5
 Make sure the correct Region is selected
-![Step 5](image-4.png)
+![Step 5](../images/image-4.png)
 
 ### Step 6
 Enter the Key pair name
-![Step 6](image-5.png)
+![Step 6](../images/image-5.png)
 
 ### Step 7
 For "SSH public key source" either choose Generate new key pair or Upload existing public key, For this I will chooe Upload existing public key
 
-![Step 7](image-7.png)
+![Step 7](../images/image-7.png)
 
 ### Step 8
 Enter existing public key
-![Step 8](image-8.png)
+![Step 8](../images/image-8.png)
 
 ### Step 9
 Create tags
-![Step 9](image-12.png)
+![Step 9](../images/image-12.png)
 
 ### Step 10
 Review Changes
 
-![Step 10](image-13.png)
+![Step 10](../images/image-13.png)
 
 ### Step 11
 Click create
 
-![Step 11](image-15.png)
+![Step 11](../images/image-15.png)
 
 ### Step 12
 Refresh and make sure the key is in the list
 
-![Step 12](image-16.png)
+![Step 12](../images/image-16.png)
 
 ## - Virtual Network 
 ### Step 13 
 In the seach bar of Azure, Input Virutal Network and click it, as in step 1.
 
-![alt text](image-23.png)
+![alt text](../images/image-23.png)
 
 ### Step 14
 Click Create
 
-![alt text](image-24.png)
+![alt text](../images/image-24.png)
 
 ### Step 15
 Input the Subscription, Resource group, Virtual Network name and Region
 
-![alt text](image-17.png)
+![alt text](../images/image-17.png)
 
 ### Step 16
 Click IP Addresses
 
-![alt text](image-25.png)
+![alt text](../images/image-25.png)
 
 ### Step 17
 Click Add Subnet
 
-![alt text](image-20.png)
+![alt text](../images/image-20.png)
 
 ### Step 18
 Change the name to public-subnet and change the starting address to 10.0.1.0 and change the Size to /24 
 
-![alt text](image-18.png)
+![alt text](../images/image-18.png)
 
 ### Step 19
 Create a new subnet and Change the name to private-subnet and change the starting address to 10.0.3.0 and change the Size to /24 
 
-![alt text](image-19.png)
+![alt text](../images/image-19.png)
 
 ### Step 20
 Then hit next and contiue to the tags section and write owner with your tag name
 
-![alt text](image-21.png)
+![alt text](../images/image-21.png)
 
 ### Step 21
 Review the Virtual Network and press create
 
-![alt text](image-22.png)
+![alt text](../images/image-22.png)
 
 ### Step 22
 Refresh and Check the list of networks
 
-![alt text](image-26.png)
+![alt text](../images/image-26.png)
 
 ## - Virtual Machine (App)
 ### Step 23 
 Click on the serach bar and input "virtual machines" and click Virtual machines
 
-![alt text](image-27.png)
+![alt text](../images/image-27.png)
 
 ### Step 24
 Click Create
 
-![alt text](image-34.png)
+![alt text](../images/image-34.png)
 
 ### Step 25
 Click Azure virtual machine
-![alt text](image-35.png)
+![alt text](../images/image-35.png)
 
 ### Step 26
 In project details, Select the Subscription and Resource group
 
-![alt text](image-36.png)
+![alt text](../images/image-36.png)
 
 ### Step 27
 In the instance details section, Change the Virutal machine name, Region, Image and Size
 
-![alt text](image-37.png)
+![alt text](../images/image-37.png)
 
 ### Step 28
 In the Administrator account section, Cahnge the Authentication type to SSH public key, Change the Username to adminuser, change the SSH public key source to Use existing key stored in Azure and Select the previous key with Stored Keys
 
-![alt text](image-38.png)
+![alt text](../images/image-38.png)
 
 ### Step 29
 Click on Disks
 
-![alt text](image-39.png)
+![alt text](../images/image-39.png)
 
 ### Step 30
 In OS disk, change OS disk type to Standard SSD (locally-redundant storage)
 
-![alt text](image-40.png)
+![alt text](../images/image-40.png)
 
 ### Step 31
 Click on Networking
 
-![alt text](image-41.png)
+![alt text](../images/image-41.png)
 
 ### Step 32
 In Network interface, Choose the Virtual network from previous steps and select the public-subnet Subnet.
 
-![alt text](image-42.png)
+![alt text](../images/image-42.png)
 
 ### Step 33
 Click Advanced for NIC network security group
 
-![alt text](image-43.png)
+![alt text](../images/image-43.png)
 
 ### Step 34
 For Configure network security group, Click Create new
 
-![alt text](image-44.png)
+![alt text](../images/image-44.png)
 
 ### Step 35
 Choose a Name and click "Add an inbound rule"
 
-![alt text](image-45.png)
+![alt text](../images/image-45.png)
 
 ### Step 36
 Click Serivce and then HTTP, Then click Add
 
-![alt text](image-46.png)
+![alt text](../images/image-46.png)
 
 ### Step 37
 Add another inbound rule, however change Destination port ranges to 3000 and protocol to TCP then click Add 
 
-![alt text](image-47.png)
+![alt text](../images/image-47.png)
 
 ### Step 38
 Review changes and click ok
 
-![alt text](image-48.png)
+![alt text](../images/image-48.png)
 
 ### Step 39
 Navigate to Tags
 
-![alt text](image-49.png)
+![alt text](../images/image-49.png)
 
 ### Step 40
 Click Owner and add Name
 
-![alt text](image-52.png)
+![alt text](../images/image-52.png)
 
 ### Step 41
 Click Review + create
-![alt text](image-53.png)
+![alt text](../images/image-53.png)
 
 ### Step 42
 Review changes and click Create
 
-![alt text](image-54.png)
+![alt text](../images/image-54.png)
 
 ### Step 43
 Click refresh and check the list
 
-![alt text](image-55.png)
+![alt text](../images/image-55.png)
 
 ## Database Deployment
 ### Step 44
@@ -414,11 +414,11 @@ echo done!
 ### Step 47
 Go to the App Deployment Virtual Machine find the Public Ip
 
-![alt text](image-56.png)
+![alt text](../images/image-56.png)
 
 ### Step 48
 Enter IP Address/Posts into Web Browser
-![alt text](image-57.png)
+![alt text](../images/image-57.png)
 
 # Differences between AWS and Azure: SSH Keys, Virtual Networks, and Virtual Machines
 
