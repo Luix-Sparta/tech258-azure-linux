@@ -1,5 +1,8 @@
 # 2 Tier App deployment
 
+This guide outlines the steps to deploy a 2-tier application on Microsoft Azure. The deployment process involves setting up SSH keys, configuring virtual networks, provisioning virtual machines, deploying a database, and running application scripts. Below are the detailed steps for each component of the deployment process:
+
+
 - [2 Tier App deployment](#2-tier-app-deployment)
   - [SSH Key](#ssh-key)
     - [Step 1](#step-1)
