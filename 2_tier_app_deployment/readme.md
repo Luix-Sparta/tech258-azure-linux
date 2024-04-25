@@ -56,16 +56,7 @@
   - [Testing](#testing)
     - [Step 47](#step-47)
     - [Step 48](#step-48)
-- [Differences between AWS and Azure: SSH Keys, Virtual Networks, and Virtual Machines](#differences-between-aws-and-azure-ssh-keys-virtual-networks-and-virtual-machines)
-  - [SSH Keys](#ssh-keys)
-    - [AWS](#aws)
-    - [Azure](#azure)
-  - [Virtual Networks](#virtual-networks)
-    - [AWS](#aws-1)
-    - [Azure](#azure-1)
-  - [Virtual Machines](#virtual-machines)
-    - [AWS](#aws-2)
-    - [Azure](#azure-2)
+  - [Differences with AWS and AZure](#differences-with-aws-and-azure)
 
 
 ## SSH Key
@@ -420,40 +411,4 @@ Go the App Deployment Virtual Machine find the Public Ip
 Enter IP Address/Posts into Web Browser
 ![alt text](image-57.png)
 
-# Differences between AWS and Azure: SSH Keys, Virtual Networks, and Virtual Machines
-
-## SSH Keys
-
-### AWS
-- In AWS, when you create an EC2 instance, you can choose to use SSH key pairs for authentication.
-- AWS uses the concept of key pairs, where you generate a key pair locally and then upload the public key to AWS. The private key remains on your local machine.
-- You can associate a specific SSH key pair with an EC2 instance during the instance creation process or later by modifying the instance settings.
-
-### Azure
-- Similarly, in Azure, SSH key pairs can be used for authentication when accessing virtual machines.
-- Azure also uses the concept of key pairs, but it handles the generation and management of SSH keys within the Azure portal.
-- When creating a virtual machine in Azure, you can either use password authentication or SSH key authentication. If SSH key authentication is chosen, Azure generates the key pair and associates it with the virtual machine.
-
-## Virtual Networks
-
-### AWS
-- In AWS, virtual networks are known as Virtual Private Clouds (VPCs).
-- VPCs allow you to logically isolate your resources in the cloud, providing network-level control and security.
-- You can create multiple VPCs in different AWS regions and connect them using VPC peering or VPN connections.
-
-### Azure
-- Azure's equivalent of VPCs is called Virtual Networks (VNets).
-- VNets also offer network isolation and segmentation for Azure resources.
-- Azure VNets support features like subnetting, Network Security Groups (NSGs), and Virtual Network Gateways for connecting on-premises networks to Azure VNets.
-
-## Virtual Machines
-
-### AWS
-- AWS provides Elastic Compute Cloud (EC2) for virtual machine provisioning.
-- EC2 instances come in various types and sizes, allowing you to choose resources based on your workload requirements.
-- AWS offers a wide range of operating system choices for EC2 instances, including various Linux distributions and Windows Server.
-
-### Azure
-- Azure offers Virtual Machines (VMs) for running applications and workloads in the cloud.
-- Similar to AWS, Azure VMs come in different sizes and configurations to meet varying performance and scalability needs.
-- Azure VMs support both Windows and Linux operating systems, with a variety of pre-configured images available in the Azure Marketplace.
+## Differences with AWS and AZure
