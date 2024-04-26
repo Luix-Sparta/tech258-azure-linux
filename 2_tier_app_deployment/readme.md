@@ -459,3 +459,8 @@ Enter IP Address/Posts into Web Browser
 - Azure offers Virtual Machines (VMs) for running applications and workloads in the cloud.
 - Similar to AWS, Azure VMs come in different sizes and configurations to meet varying performance and scalability needs.
 - Azure VMs support both Windows and Linux operating systems, with a variety of pre-configured images available in the Azure Marketplace.
+
+## More Differences 
+- For Azure, A default rule for a security group, allow any internal traffic on your Virtual Network.
+- Resources for the Virtual machine are split up into resources such as Disk and Ip Address.
+- Public IP for an Azure Virtual Machine is set, however for AWS by default changes when the Instance restarts.
