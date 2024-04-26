@@ -465,6 +465,8 @@ Enter IP Address/Posts into Web Browser
 - Resources for the Virtual machine are split up into resources such as Disk and Ip Address.
 - Public IP for an Azure Virtual Machine is set, however for AWS by default changes when the Instance restarts.
 
+## User Data
+
 **Deploying MongoDB using User Data in Azure**
 
 When deploying your MongoDB database VM in Azure, you can streamline the installation and configuration process by utilizing User Data. User Data allows you to automate the setup steps, ensuring that MongoDB is installed and configured correctly without manual intervention. Below is a guide on how to implement User Data for your MongoDB deployment:
