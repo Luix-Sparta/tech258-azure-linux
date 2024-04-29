@@ -581,24 +581,33 @@ Remember to update your custom images regularly to incorporate any changes or up
    To get the app running with the posts page using User Data in Azure, you typically need to include commands to set up the environment, install dependencies, and start the server. Specifically for the posts page functionality, you might need to ensure that the database connection is configured correctly. Here's a basic example of User Data script:
 
    ```bash
-   #!/bin/bash
-   
-   # Install necessary dependencies
-   apt-get update
-   apt-get install -y <dependency-package>
+    #!/bin/bash
 
-   # Set up environment variables
-   export DB_HOST=<database-host>
-   export DB_PORT=<database-port>
+    echo set DB_HOST env var
+    export DB_HOST=mongodb://10.0.3.5:27017/posts
+    echo done!
 
-   # Install and configure the application
-   git clone <repository-url>
-   cd <repository-directory>
-   npm install
-   npm run build
+    echo cd app folder
+    cd ~/tech258-sparta-test-app/app
+    echo done!
 
-   # Start the server
-   npm start
+    echo install npm
+    sudo -E npm install
+    echo done!
+
+    echo install pm2
+    sudo -E npm install -g pm2
+    echo done!
+
+    pm2 delete app
+
+    echo stop app
+    pm2 stop app
+    echo done!
+
+    echo start app
+    pm2 start app.js app
+    echo done!
    ```
 
 If the posts page functionality is not needed, you can comment out or remove the relevant sections from the User Data script. For example, you can exclude the installation and configuration of dependencies related to the posts page, as well as any specific setup steps or environment variables associated with it.
