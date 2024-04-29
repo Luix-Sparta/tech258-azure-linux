@@ -422,6 +422,32 @@ Go to the App Deployment Virtual Machine find the Public Ip
 Enter IP Address/Posts into Web Browser
 ![alt text](../images/image-57.png)
 
+# How to create a VM Image in Azure (Database And App)
+
+1. **Prepare and Configure the Virtual Machine**:
+   - Log in to the Azure portal at https://portal.azure.com.
+   - Navigate to "Virtual machines" in the Azure portal.
+   - Create a new virtual machine or select an existing one that you want to capture as an image.
+   - Configure the VM with your desired operating system, size, networking, and any necessary software or configurations.
+
+2. **Generalize the Virtual Machine**:
+   - Once the VM is configured, you need to generalize it. Generalizing removes any unique information from the VM.
+   - Stop the virtual machine to prepare it for generalization. Select your VM in the Azure portal, go to "Stop" under the "Operations" section, and confirm the action.
+   - After the VM is stopped, navigate to "Settings" > "Configuration" > "Guest Configuration" and set "Guest OS diagnostics" to "Off".
+   - Once the above steps are completed, click on "Generalize VM" under "Operations". This will prepare the VM for capturing an image.
+
+3. **Capture the VM Image**:
+   - After generalizing the VM, you can capture it as a VM image.
+   - Select your VM in the Azure portal, go to "Capture" under the "Operations" section, and provide the necessary details such as the image name, resource group, and region.
+   - Click on "OK" to start the image capture process.
+
+4. **Monitor Image Capture Progress**:
+   - Azure will start capturing the VM as an image. You can monitor the progress in the notifications area of the Azure portal.
+
+5. **Use the Image to Create New VMs**:
+   - Once the image is successfully captured, it will be available in your Azure account.
+   - You can use this image to create new virtual machines in Azure. Navigate to "Images" in the Azure portal, select your captured image, and click on "Create VM" to deploy new VMs based on this image.
+
 # Differences between AWS and Azure: SSH Keys, Virtual Networks, and Virtual Machines
 
 ## SSH Keys
