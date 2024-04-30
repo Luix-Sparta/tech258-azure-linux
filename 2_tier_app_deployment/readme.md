@@ -430,16 +430,20 @@ Enter IP Address/Posts into Web Browser
    - Create a new virtual machine or select an existing one that you want to capture as an image.
    - Configure the VM with your desired operating system, size, networking, and any necessary software or configurations.
 
+![img.png](../images/img_image.png)
+   
 2. **Generalize the Virtual Machine**:
    - Once the VM is configured, you need to generalize it. Generalizing removes any unique information from the VM.
-   - Stop the virtual machine to prepare it for generalization. Select your VM in the Azure portal, go to "Stop" under the "Operations" section, and confirm the action.
-   - After the VM is stopped, navigate to "Settings" > "Configuration" > "Guest Configuration" and set "Guest OS diagnostics" to "Off".
-   - Once the above steps are completed, click on "Generalize VM" under "Operations". This will prepare the VM for capturing an image.
+   - SSH into the Instance
+   - Type `waagent -deprovision+user` into the instance. 
+   - This will prepare the VM for capturing an image by removes any unique information from the VM.
 
 3. **Capture the VM Image**:
    - After generalizing the VM, you can capture it as a VM image.
    - Select your VM in the Azure portal, go to "Capture" under the "Operations" section, and provide the necessary details such as the image name, resource group, and region.
    - Click on "OK" to start the image capture process.
+   
+![img.png](../images/img_capture.png)
 
 4. **Monitor Image Capture Progress**:
    - Azure will start capturing the VM as an image. You can monitor the progress in the notifications area of the Azure portal.
@@ -510,6 +514,13 @@ When deploying your MongoDB database VM in Azure, you can streamline the install
 6. **Troubleshooting**: If any issues arise during the deployment process, you can troubleshoot by examining the log files. Look for any errors or warnings that may indicate problems with the execution of your User Data script.
 
 By utilizing User Data, you can automate the deployment of MongoDB in Azure, saving time and ensuring consistency across your environments. Remember to test your User Data script thoroughly before deploying it in a production environment.
+
+Ways Of Checking The File:
+
+- Use sudo -E 
+- (Recurisvely) Change permissions using chmod 
+- (Recursively) Take ownership of the folder. 
+- Temporarily login as root 
 
 **Deploying the App Using User Data in Azure**
 
@@ -611,3 +622,160 @@ Remember to update your custom images regularly to incorporate any changes or up
    ```
 
 If the posts page functionality is not needed, you can comment out or remove the relevant sections from the User Data script. For example, you can exclude the installation and configuration of dependencies related to the posts page, as well as any specific setup steps or environment variables associated with it.
+
+Speed to deploy- 
+
+![img.png](../images/img_image_diagram.png)
+
+## Monitoring, Alert Management and Auto Scaling
+
+Azure Monitor - Monitoring e.g Cpu Load
+AWS Cloudwatch - Monitoring e.g CPU Load
+Dashboard - Alarm (Set Threshold) - Notification - Auto Scaling (Azure Virtual Machine Scale sets, AWS Auto Scaling Group)
+
+![img.png](../images/img_monitoring_diagram.png)
+
+Scaling up - Current virtual machine replaced by larger machine and work is shifted over, small one is removed.
+Scaling down - Current virtual machine replaced by smaller machine and work is shifted over, larger one is removed.
+
+
+Auto Scaling - Increase number of virtual machines
+
+### Creating A Dashboard
+
+1. Go to App Instance - Overview
+![img.png](../images/monitoring_images/img.png)
+2. Click Monitoring
+![img_1.png](../images/monitoring_images/img_1.png)
+3. Cpu (average)
+![img_2.png](../images/monitoring_images/img_2.png)
+4. To see more charts
+![img_3.png](../images/monitoring_images/img_3.png)
+5. Click the Pin 
+![img_4.png](../images/monitoring_images/img_4.png)
+6. Click Create new and fill in the details.
+![img_5.png](../images/monitoring_images/img_5.png)
+7. To Pin Exisitng click Pin
+![img_6.png](../images/monitoring_images/img_6.png)
+8. Choose Dashboard and click Create
+![img_7.png](../images/monitoring_images/img_7.png)
+9. Write Dashboard and click on that
+![img_8.png](../images/monitoring_images/img_8.png)
+10. Click on Dashboard
+![img_9.png](../images/monitoring_images/img_9.png)
+11. Click Edit
+![img_11.png](../images/monitoring_images/img_11.png)
+12. Edit and save
+![img_10.png](../images/monitoring_images/img_10.png)
+13. Click on Chart
+![img_12.png](../images/monitoring_images/img_12.png)
+14. Change Time
+![img_13.png](../images/monitoring_images/img_13.png)
+15. Click Save to Dashboard
+![img_18.png](../images/monitoring_images/img_18.png)
+
+### Performance Testing
+
+Performance testing with tools like Apache Bench (ab) helps simulate load conditions on the application to assess its scalability and performance under various scenarios.
+
+**Command:**
+```ab -n 1000 -c 100 http://20.90.163.28/.com/```
+
+**Result:**
+```
+adminuser@tech258-l-app-for-monitoring-vm:~$ ab -n 1000 -c 100 http://20.90.163.28/.com/
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 20.90.163.28 (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.18.0
+Server Hostname:        20.90.163.28
+Server Port:            80
+
+Document Path:          /.com/
+Document Length:        144 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.712 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      419000 bytes
+HTML transferred:       144000 bytes
+Requests per second:    584.26 [#/sec] (mean)
+Time per request:       171.158 [ms] (mean)
+Time per request:       1.712 [ms] (mean, across all concurrent requests)
+Transfer rate:          239.07 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   2.8      1      22
+Processing:     7  162  31.7    164     227
+Waiting:        3  162  31.7    164     227
+Total:          8  164  30.7    165     228
+
+Percentage of the requests served within a certain time (ms)
+  50%    165
+  66%    172
+  75%    176
+  80%    180
+  90%    193
+  95%    209
+  98%    223
+  99%    225
+ 100%    228 (longest request)
+```
+
+```ab -n 10000 -c 200 http://20.90.163.28/.com/```
+
+This command above and checking the dashboard helps us to check the CPU usage.
+
+![img_20.png](../images/monitoring_images/img_20.png)
+
+![img_21.png](../images/monitoring_images/img_21.png)
+
+This image shows the spike due to testing the CPU.
+
+### How To Create An Alert
+
+1. Navigate to your instance
+2. Scroll down and click Monitoring
+3. Click "Set up recommendations"
+![img_23.png](../images/monitoring_images/img_23.png)
+4. Change 80% to 3%
+![img_24.png](../images/monitoring_images/img_24.png)
+5. Also enable the toggle on the right
+![img_25.png](../images/monitoring_images/img_25.png)
+6. Scroll down and make sure the "Notify me by" section, has Email enabled with an email inside the field.
+![img_26.png](../images/monitoring_images/img_26.png)
+7. Click Save
+![img_27.png](../images/monitoring_images/img_27.png)
+8. Click on the three dots and click "Alert rules"
+![img_28.png](../images/monitoring_images/img_28.png)
+9. The alert should be shown here
+![img_29.png](../images/monitoring_images/img_29.png)
+10. Open it, click Edit and click conditions
+![img_30.png](../images/monitoring_images/img_30.png)
+11. Change it to every 1 Minute and save
+
+### Testing Alert
+
+1. Run this command `ab -n 10000 -c 200 http://20.90.163.28/.com/`
+![img_31.png](../images/monitoring_images/img_31.png)
+2. Check Email
+![img_32.png](../images/monitoring_images/img_32.png)
+![img_33.png](../images/monitoring_images/img_33.png)
