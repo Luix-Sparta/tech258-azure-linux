@@ -629,49 +629,96 @@ Speed to deploy-
 
 ## Monitoring, Alert Management and Auto Scaling
 
-Azure Monitor - Monitoring e.g Cpu Load
-AWS Cloudwatch - Monitoring e.g CPU Load
-Dashboard - Alarm (Set Threshold) - Notification - Auto Scaling (Azure Virtual Machine Scale sets, AWS Auto Scaling Group)
+
+Monitoring, alert management, and auto-scaling are crucial components of cloud infrastructure management, ensuring optimal performance, timely responses to incidents, and efficient resource utilization.
+
+Monitoring, alert management, and auto-scaling are crucial components of cloud infrastructure management, ensuring optimal performance, timely responses to incidents, and efficient resource utilization.
+
+### Monitoring Solutions
+
+- **Azure Monitor:** Azure's monitoring solution provides comprehensive insights into resource utilization, performance metrics, and application health, allowing users to monitor various aspects such as CPU load, memory usage, and network traffic.
+
+- **AWS CloudWatch:** CloudWatch is Amazon Web Services' monitoring and observability service that collects and tracks metrics, logs, and events from AWS resources and applications. It offers detailed monitoring capabilities for monitoring CPU load, memory utilization, and other performance metrics.
+
+### Alert Management
+
+Monitoring solutions like Azure Monitor and AWS CloudWatch enable users to set up alarms based on predefined thresholds for metrics such as CPU load, memory usage, and response times. When an alarm is triggered, notifications are sent to designated recipients via email, SMS, or other communication channels.
+
+### Auto Scaling
+
+Auto scaling is a key feature for dynamically adjusting the capacity of cloud resources based on demand. Both Azure and AWS offer auto-scaling capabilities:
+
+- **Azure Virtual Machine Scale Sets:** Azure VM Scale Sets automatically scale the number of VM instances based on demand or a defined schedule, ensuring optimal performance and resource utilization.
+
+- **AWS Auto Scaling Group:** AWS Auto Scaling automatically adjusts the number of EC2 instances or other AWS resources in response to changes in demand or metrics, helping maintain application availability and performance.
 
 ![img.png](../images/img_monitoring_diagram.png)
 
 Scaling up - Current virtual machine replaced by larger machine and work is shifted over, small one is removed.
 Scaling down - Current virtual machine replaced by smaller machine and work is shifted over, larger one is removed.
 
-
 Auto Scaling - Increase number of virtual machines
 
 ### Creating A Dashboard
 
 1. Go to App Instance - Overview
+
 ![img.png](../images/monitoring_images/img.png)
+
 2. Click Monitoring
+
 ![img_1.png](../images/monitoring_images/img_1.png)
+
 3. Cpu (average)
+
 ![img_2.png](../images/monitoring_images/img_2.png)
+
 4. To see more charts
+
 ![img_3.png](../images/monitoring_images/img_3.png)
+
 5. Click the Pin 
+
 ![img_4.png](../images/monitoring_images/img_4.png)
+
 6. Click Create new and fill in the details.
+
 ![img_5.png](../images/monitoring_images/img_5.png)
+
 7. To Pin Exisitng click Pin
+
 ![img_6.png](../images/monitoring_images/img_6.png)
+
 8. Choose Dashboard and click Create
+
 ![img_7.png](../images/monitoring_images/img_7.png)
+
 9. Write Dashboard and click on that
+
 ![img_8.png](../images/monitoring_images/img_8.png)
+
 10. Click on Dashboard
+
 ![img_9.png](../images/monitoring_images/img_9.png)
+
 11. Click Edit
+
 ![img_11.png](../images/monitoring_images/img_11.png)
+
 12. Edit and save
+
 ![img_10.png](../images/monitoring_images/img_10.png)
+
 13. Click on Chart
+
 ![img_12.png](../images/monitoring_images/img_12.png)
+
 14. Change Time
+
 ![img_13.png](../images/monitoring_images/img_13.png)
+
 15. Click Save to Dashboard
+
 ![img_18.png](../images/monitoring_images/img_18.png)
 
 ### Performance Testing
@@ -753,29 +800,51 @@ This image shows the spike due to testing the CPU.
 ### How To Create An Alert
 
 1. Navigate to your instance
+
 2. Scroll down and click Monitoring
+
 3. Click "Set up recommendations"
+
 ![img_23.png](../images/monitoring_images/img_23.png)
+
 4. Change 80% to 3%
+
 ![img_24.png](../images/monitoring_images/img_24.png)
+
 5. Also enable the toggle on the right
+
 ![img_25.png](../images/monitoring_images/img_25.png)
+
 6. Scroll down and make sure the "Notify me by" section, has Email enabled with an email inside the field.
+
 ![img_26.png](../images/monitoring_images/img_26.png)
+
 7. Click Save
+
 ![img_27.png](../images/monitoring_images/img_27.png)
+
 8. Click on the three dots and click "Alert rules"
+
 ![img_28.png](../images/monitoring_images/img_28.png)
+
 9. The alert should be shown here
+
 ![img_29.png](../images/monitoring_images/img_29.png)
+
 10. Open it, click Edit and click conditions
+
 ![img_30.png](../images/monitoring_images/img_30.png)
+
 11. Change it to every 1 Minute and save
 
 ### Testing Alert
 
 1. Run this command `ab -n 10000 -c 200 http://20.90.163.28/.com/`
+
 ![img_31.png](../images/monitoring_images/img_31.png)
+
 2. Check Email
+
 ![img_32.png](../images/monitoring_images/img_32.png)
+
 ![img_33.png](../images/monitoring_images/img_33.png)
