@@ -779,3 +779,4 @@ This image shows the spike due to testing the CPU.
 2. Check Email
 ![img_32.png](../images/monitoring_images/img_32.png)
 ![img_33.png](../images/monitoring_images/img_33.png)
+3. 
