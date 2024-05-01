@@ -851,7 +851,7 @@ This image shows the spike due to testing the CPU.
 
 ## Autoscaling Groups
 
-# Understanding Virtual Machine Scale Sets (VMSS)
+### Understanding Virtual Machine Scale Sets (VMSS)
 
 - **VMSS Purpose**: It's like a team of identical virtual machines that automatically grows or shrinks based on how busy the application is. This keeps things running smoothly even when lots of people are using the app.
 
