@@ -848,3 +848,161 @@ This image shows the spike due to testing the CPU.
 ![img_32.png](../images/monitoring_images/img_32.png)
 
 ![img_33.png](../images/monitoring_images/img_33.png)
+
+## Autoscaling Groups
+
+# Understanding Virtual Machine Scale Sets (VMSS)
+
+- **VMSS Purpose**: It's like a team of identical virtual machines that automatically grows or shrinks based on how busy the application is. This keeps things running smoothly even when lots of people are using the app.
+
+- **Custom Images**: These are like blueprints for the virtual machines, containing all the stuff needed for the app to work properly.
+
+- **Auto Scaling**: Imagine adding more chairs to a restaurant when it gets busy and removing them when it's quiet. VMSS does that automatically for virtual machines based on how much work they're doing.
+
+- **Minimum and Maximum Instances**: You can set rules for how many virtual machines are always running (minimum) and how many can be created at most (maximum). This ensures there's always enough but not too many.
+
+- **Availability Zones**: It's like having your team spread out across different locations in case something goes wrong in one place. This helps keep the app running even if there's a problem in one area.
+
+- **Load Balancer**: Think of it like a traffic cop directing cars to different lanes. The load balancer sends users to different virtual machines so no one gets overwhelmed with too much work.
+
+- **Documentation and Diagrams**: Just like drawing a map to show where everything is, documenting VMSS helps everyone understand how it's set up and why it works the way it does.
+
+Extra Info: Default is now called initial
+
+![img_1.png](../images/autoscale_group/img_1.png)
+
+## Steps to Create an Autoscale group
+
+Extra Info: Load Balancer has an IP address
+
+1. Write "Virtual Machine Scale Set" in Azure and navigate to it
+![img_2.png](../images/autoscale_group/img_2.png)
+
+2. Click "Create"
+![img_3.png](../images/autoscale_group/img_3.png)
+
+3. Set the Subscription and Resource Group
+![img_4.png](../images/autoscale_group/img_4.png)
+
+4. Set the name
+![img_5.png](../images/autoscale_group/img_5.png)
+
+5. Set the Availability zones
+![img_6.png](../images/autoscale_group/img_6.png)
+
+6. Change the Orchestration mode to "Uniform"
+![img_7.png](../images/autoscale_group/img_7.png)
+
+7. Change the Scaling mode to Autoscaling
+![img_8.png](../images/autoscale_group/img_8.png)
+
+8. Click "Configure" on Scaling configuration
+![img_9.png](../images/autoscale_group/img_9.png)
+
+9. Click "Default condition"
+![img_10.png](../images/autoscale_group/img_10.png)
+
+10. Change Maximum to 3 and Scale out CPU threshold to 75 and click save
+![img_11.png](../images/autoscale_group/img_11.png)
+
+11. Click "Save"
+![img_12.png](../images/autoscale_group/img_12.png)
+
+12. Select Image
+![img_13.png](../images/autoscale_group/img_13.png)
+
+13. Change Administrator account details
+![img_14.png](../images/autoscale_group/img_14.png)
+
+14. Select Other for License type
+![img_15.png](../images/autoscale_group/img_15.png)
+
+15. Click Disks
+![img_16.png](../images/autoscale_group/img_16.png)
+
+16. Change OS disk type to Standard SSD
+![img_17.png](../images/autoscale_group/img_17.png)
+
+17. Click Networking
+![img_18.png](../images/autoscale_group/img_18.png)
+
+18. Choose Virtual network
+![img_19.png](../images/autoscale_group/img_19.png)
+
+19. Click on the edit button
+![img_20.png](../images/autoscale_group/img_20.png)
+
+20. Select the Network Interface Settings and click ok
+![img_21.png](../images/autoscale_group/img_21.png)
+
+21. Click Create a load balancer
+![img_23.png](../images/autoscale_group/img_23.png)
+
+22. Input a name and click Create
+![img_22.png](../images/autoscale_group/img_22.png)
+
+23. Go to Health
+![img_24.png](../images/autoscale_group/img_24.png)
+
+24. Enable application health monitoring
+![img_25.png](../images/autoscale_group/img_25.png)
+
+25. Enable automatic repairs
+![img_26.png](../images/autoscale_group/img_26.png)
+
+26. Go to Advanced
+![img_27.png](../images/autoscale_group/img_27.png)
+
+27. Enable and input user data
+
+**Code:** 
+```
+#!/bin/bash
+
+echo cd app folder
+cd /tech258-sparta-test-app/app
+echo done!
+
+echo start app
+pm2 start app.js app
+echo done!
+```
+![img_28.png](../images/autoscale_group/img_28.png)
+
+28. Go to Tags
+![img_29.png](../images/autoscale_group/img_29.png)
+
+29. Input Tags
+![img_30.png](../images/autoscale_group/img_30.png)
+
+30. Go to Review + Create and review 
+![img_31.png](../images/autoscale_group/img_31.png)
+
+31. Click Create
+![img_32.png](../images/autoscale_group/img_32.png)
+
+32. Navigate to the Scale group and check if its running
+![img_33.png](../images/autoscale_group/img_33.png)
+
+## How to SSH into scale set instance
+
+1. Use the Load Balancer IP and 50000 (The first instance)
+
+2.  Input this command into the SSH terminal
+    `ssh -i ~/.ssh/tech258-luixhiano-az-key -p 50000 adminuser@4.158.68.162`
+
+3. Change the port depending on the instance you want to enter
+
+## How to Delete Scale Set
+ 
+1. Delete Scale Set
+
+![img_34.png](../images/autoscale_group/img_34.png)
+
+2. Delete Load Balancer
+
+![img_35.png](../images/autoscale_group/img_35.png)
+
+3. Delete Load Balancer Ip
+
+![img_36.png](../images/autoscale_group/img_36.png)
