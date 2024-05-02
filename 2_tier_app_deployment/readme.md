@@ -870,6 +870,7 @@ Extra Info: Load Balancer has an IP address
 ![img_10.png](../images/autoscale_group/img_10.png)
 
 10. Change Maximum to 3 and Scale out CPU threshold to 75 and click save
+In the Autoscaling configuration, changing the maximum number of instances to 3 and setting the CPU threshold for scaling out to 75% means that the system will automatically add VM instances up to a maximum of 3 when CPU usage hits 75% or more. This helps manage resource allocation efficiently without overspending on unnecessary VMs.
 ![img_11.png](../images/autoscale_group/img_11.png)
 
 11. Click "Save"
@@ -912,9 +913,11 @@ Extra Info: Load Balancer has an IP address
 ![img_24.png](../images/autoscale_group/img_24.png)
 
 24. Enable application health monitoring
+**Application Health Monitoring:** Azure provides tools to monitor the health of applications running on VMSS instances. This includes checking for application failures, responsiveness, and overall performance.
 ![img_25.png](../images/autoscale_group/img_25.png)
 
 25. Enable automatic repairs
+**Automatic Repairs:** Azure allows automatic repairs to be configured for VMSS instances. If an instance becomes unhealthy due to application failures or other issues, Azure can automatically initiate repair actions to restore the instance's health.
 ![img_26.png](../images/autoscale_group/img_26.png)
 
 26. Go to Advanced
