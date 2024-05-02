@@ -832,9 +832,7 @@ This image shows the spike due to testing the CPU.
 
 - **Availability Zones**: It's like having your team spread out across different locations in case something goes wrong in one place. This helps keep the app running even if there's a problem in one area.
 
-- **Load Balancer**: Think of it like a traffic cop directing cars to different lanes. The load balancer sends users to different virtual machines so no one gets overwhelmed with too much work.
-
-- **Documentation and Diagrams**: Just like drawing a map to show where everything is, documenting VMSS helps everyone understand how it's set up and why it works the way it does.
+- **Load Balancer**: Think of it like a traffic officer directing cars to different lanes. The load balancer sends users to different virtual machines so no one gets overwhelmed with too much work.
 
 Extra Info: Default is now called initial
 
@@ -975,3 +973,21 @@ echo done!
 3. Delete Load Balancer Ip
 
 ![img_36.png](../images/autoscale_group/img_36.png)
+
+
+## Virtual Network
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
