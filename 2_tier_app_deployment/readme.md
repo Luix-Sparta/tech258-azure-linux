@@ -855,6 +855,7 @@ Extra Info: Load Balancer has an IP address
 ![img_5.png](../images/autoscale_group/img_5.png)
 
 5. Set the Availability zones
+By setting Availability Zones for a Scale Set, you're essentially spreading the VM instances across different data centers within the same region. This provides redundancy and fault tolerance, as it ensures that if one data center or Availability Zone experiences an outage, the VM instances in other zones can continue to operate without disruption.
 ![img_6.png](../images/autoscale_group/img_6.png)
 
 6. Change the Orchestration mode to "Uniform"
