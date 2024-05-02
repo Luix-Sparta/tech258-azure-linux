@@ -957,6 +957,15 @@ Create a Tag to track resources
 32. Navigate to the Scale group and check if its running
 ![img_33.png](../images/autoscale_group/img_33.png)
 
+## Scale Set Instance Health
+
+* **Continuous Monitoring:** Azure constantly monitors the health of each virtual machine instance within the Virtual Machine Scale Set (VMSS).
+* **Health Probes:** Azure Load Balancer regularly sends health probes to each VM instance to check its responsiveness and availability.
+* **Automatic Remediation:** If an instance is found to be unhealthy due to issues like resource exhaustion or software failures, Azure may automatically take corrective actions, such as restarting the instance or provisioning a replacement.
+* **Load Balancing:** Healthy instances receive incoming traffic from the load balancer, ensuring even distribution of requests. Unhealthy instances are temporarily removed from the pool to prevent them from serving requests until they recover.
+* **Integration with Monitoring Tools:** Scale Set Instance Health data can be integrated with Azure monitoring tools like Azure Monitor, allowing administrators to track the health status of instances, set up alerts, and perform analysis for proactive management and troubleshooting.
+* **Fault Tolerance:** Monitoring and managing the health of VM instances within the scale set contribute to the overall fault tolerance of the application. By quickly identifying and addressing issues with individual instances, the system maintains high availability and reliability.
+
 ## How to SSH into scale set instance
 
 1. Use the Load Balancer IP and 50000 (The first instance)
