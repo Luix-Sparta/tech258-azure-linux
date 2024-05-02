@@ -966,14 +966,27 @@ Create a Tag to track resources
 * **Integration with Monitoring Tools:** Scale Set Instance Health data can be integrated with Azure monitoring tools like Azure Monitor, allowing administrators to track the health status of instances, set up alerts, and perform analysis for proactive management and troubleshooting.
 * **Fault Tolerance:** Monitoring and managing the health of VM instances within the scale set contribute to the overall fault tolerance of the application. By quickly identifying and addressing issues with individual instances, the system maintains high availability and reliability.
 
-## How to SSH into scale set instance
+## How to SSH into Scale Set Instance
 
-1. Use the Load Balancer IP and 50000 (The first instance)
+1. **Use the Load Balancer IP and Port 50000**: The first step is to identify the Load Balancer IP address associated with the scale set. Since the load balancer distributes traffic to multiple instances, you can use its IP address along with the designated port number (in this case, port 50000) to access the first instance in the scale set.
 
-2.  Input this command into the SSH terminal
-    `ssh -i ~/.ssh/tech258-luixhiano-az-key -p 50000 adminuser@4.158.68.162`
+2. **SSH Command**: Once you have the Load Balancer IP and port number, you can use the SSH command in your terminal to establish a secure shell connection to the instance. The command syntax typically includes the path to your SSH key (`-i ~/.ssh/tech258-luixhiano-az-key`), the port number (`-p 50000`), and the username and IP address of the instance (`adminuser@4.158.68.162`).
 
-3. Change the port depending on the instance you want to enter
+    ```
+    ssh -i ~/.ssh/tech258-luixhiano-az-key -p 50000 adminuser@4.158.68.162
+    ```
+
+3. **Changing Port for Different Instances**: If you need to access a different instance within the scale set, you can modify the port number in the SSH command accordingly. Each instance in the scale set typically listens on a different port, allowing you to SSH into specific instances based on your requirements.
+
+    For example, to SSH into the second instance, you might use port 50001:
+
+    ```
+    ssh -i ~/.ssh/tech258-luixhiano-az-key -p 50001 adminuser@4.158.68.162
+    ```
+
+    Similarly, for the third instance, you would use port 50002, and so on.
+
+SSH access via the Load Balancer IP and designated ports provides a convenient way to manage and troubleshoot individual instances within a scale set, allowing you to SSH into specific instances as needed.
 
 ## How to Delete Scale Set
  
