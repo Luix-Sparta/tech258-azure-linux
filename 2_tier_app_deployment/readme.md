@@ -940,6 +940,7 @@ echo done!
 ![img_29.png](../images/autoscale_group/img_29.png)
 
 29. Input Tags
+Create a Tag to track resources
 ![img_30.png](../images/autoscale_group/img_30.png)
 
 30. Go to Review + Create and review 
@@ -963,15 +964,28 @@ echo done!
 ## How to Delete Scale Set
  
 1. Delete Scale Set
-
+    1. Navigate to the Azure Portal and sign in.
+    2. Find the Scale Set resource group.
+    3. Click on the Scale Set to open its overview page.
+    4. Access Scale Set Settings.
+    5. Click on "Delete".
+    6. Confirm the deletion.
 ![img_34.png](../images/autoscale_group/img_34.png)
 
 2. Delete Load Balancer
-
+    1. Navigate to the Load Balancer resource.
+    2. Click on the Load Balancer to open its overview page.
+    3. Access Load Balancer Settings.
+    4. Click on "Delete".
+    5. Confirm the deletion.
 ![img_35.png](../images/autoscale_group/img_35.png)
 
 3. Delete Load Balancer Ip
-
+    1. Navigate to the Load Balancer IP resource.
+    2. Click on the Load Balancer IP to open its overview page.
+    3. Access Load Balancer IP Settings.
+    4. Click on "Delete".
+    5. Confirm the deletion.
 ![img_36.png](../images/autoscale_group/img_36.png)
 
 
