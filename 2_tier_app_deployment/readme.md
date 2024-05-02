@@ -905,6 +905,7 @@ In the Autoscaling configuration, changing the maximum number of instances to 3 
 ![img_21.png](../images/autoscale_group/img_21.png)
 
 21. Click Create a load balancer
+Clicking "Create a load balancer" sets up a load balancer for the 2-tier architecture scale set in Azure. This load balancer helps evenly distribute incoming traffic across multiple instances of the frontend tier, ensuring high availability and scalability for your application.
 ![img_23.png](../images/autoscale_group/img_23.png)
 
 22. Input a name and click Create
