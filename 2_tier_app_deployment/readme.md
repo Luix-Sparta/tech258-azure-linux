@@ -918,7 +918,7 @@ Clicking "Create a load balancer" sets up a load balancer for the 2-tier archite
 **Application Health Monitoring:** Azure provides tools to monitor the health of applications running on VMSS instances. This includes checking for application failures, responsiveness, and overall performance.
 ![img_25.png](../images/autoscale_group/img_25.png)
 
-25. Enable automatic repairs
+25. Enable Automatic Repairs
 **Automatic Repairs:** Azure allows automatic repairs to be configured for VMSS instances. If an instance becomes unhealthy due to application failures or other issues, Azure can automatically initiate repair actions to restore the instance's health.
 ![img_26.png](../images/autoscale_group/img_26.png)
 
@@ -956,6 +956,12 @@ Create a Tag to track resources
 
 32. Navigate to the Scale group and check if its running
 ![img_33.png](../images/autoscale_group/img_33.png)
+
+## Reimage And Upgrade (If the Userdata is modified)
+
+Re-Image - Replace the OS disk with a fresh image from when you originally set up the scale set
+
+Upgrade - Start it from the newest version, e.g the Modified Userdata will be used
 
 ## Scale Set Instance Health
 
