@@ -1035,19 +1035,330 @@ SSH access via the Load Balancer IP and designated ports provides a convenient w
 ![img_36.png](../images/autoscale_group/img_36.png)
 
 
-## Virtual Network
+## Making the Database Private (Azure)
+
+Diagram Keys -
+Safe Traffic - Green
+Unsafe Traffic - Red
+Steps - Blue
+
+![network(v2).drawio.png](/images/network(v2).drawio.png)
+
+Virtual Network (VNet): The VNet has an address range of 10.0.0.0/16. This means it can accommodate up to 65,536 IP addresses.
+
+Subnets:
+- **Public Subnet (10.0.2.0/24)**: This subnet is designated for publicly accessible components. It contains:
+  - **Network Security Group (NSG)**: Defines rules for inbound and outbound traffic. It allows SSH (port 22) and HTTP (port 80) traffic.
+  - **Network Interface Card (NIC)**: Connects the virtual machine (App VM) to the network.
+  - **Application Virtual Machine (App VM)**: Hosts the application accessible from the internet.
+  - **Public IP Address**: Provides an external IP address for users to access the application hosted on the App VM.
+
+- **DMZ Subnet**: This subnet is designated as a demilitarized zone (DMZ) for hosting intermediary network devices.
+  - **NSG**: Allows SSH traffic.
+  - **NIC**: Requires IP forwarding enabled. This allows the VM to forward traffic to other destinations.
+  - **Network Virtual Appliance (NVA) Virtual Machine**: Acts as a router or firewall between the DMZ and private subnet. It also requires IP forwarding enabled and may have additional iptables rules configured for traffic filtering.
+
+- **Private Subnet**: This subnet is for hosting sensitive components that should not be directly accessible from the internet.
+  - **NSG**: Allows SSH and MongoDB (port 27017) traffic while denying all other traffic.
+  - **NIC**: Connects the virtual machine (DB VM) to the network.
+  - **Database Virtual Machine (DB VM)**: Hosts the database and is not directly accessible from the internet.
+
+Route Table: There's a route table named "to-private-subnet" that directs traffic from the public subnet to the private subnet through the DMZ subnet, possibly via the NVA VM.
+
+Color Coding (Blue):
+These represent the major steps or tasks in setting up the architecture:
+- Setting up the NVA in the DMZ subnet.
+- Applying stricter rules on the private subnet.
+- Possibly deleting the public IP for the private subnet to enhance security.
+
+Public IPs: Both the DMZ and private subnets have public IP addresses, likely for specific purposes such as management or external access to certain services.
+
+The described 2-tier architecture on Azure with an App and a Database offers the following benefits:
+- Scalability: Allows independent scaling of the application and database tiers based on their specific requirements.
+- Security: Utilizes network security groups (NSGs) to control traffic flow and restrict direct access to the database from the internet, enhancing data security.
+- Resilience: Leverages Azure's availability sets and fault domains for high availability and fault tolerance, minimizing downtime risks.
+- Efficient Network Routing: Optimizes traffic routing between subnets for improved network performance and latency reduction.
+- Ease of Management: Simplifies network configuration and management tasks using Azure's built-in networking features, with monitoring and logging capabilities for proactive management and troubleshooting.
+
+## How to create the 3-subnet architecture (Private Database)
+ 
 
 
+1. Navigate to Virtual Network
 
+![img.png](../images/3_tier_subnet/img.png)
 
+2. Click Create
 
+![img_1.png](../images/3_tier_subnet/img_1.png)
 
+3. Select Subscription and Resource Group
 
+![img_2.png](../images/3_tier_subnet/img_2.png)
 
+4. Change the Virtual network name and Region
 
+![img_3.png](../images/3_tier_subnet/img_3.png)
 
+5. Click default in Ip addresses
 
+![img_4.png](../images/3_tier_subnet/img_4.png)
 
+6. Change Name to "public-subnet" and Starting address to "10.0.2.0" and click Add
 
+![img_5.png](../images/3_tier_subnet/img_5.png)
 
+7. Then Click Add a Subnet and input "dmz-subnet" for the name and "10.0.3.0" for the Starting address and click Add
 
+![img_6.png](../images/3_tier_subnet/img_6.png)
+
+8. Then Click Add A Subnet and input "private-subnet" for the name and "10.0.4.0" for the Starting address
+
+![img_7.png](../images/3_tier_subnet/img_7.png)
+
+9. Scroll down and Enable private subnet (no default outbound access) and click Add
+
+![img_8.png](../images/3_tier_subnet/img_8.png)
+
+10. Click Review + Create, Check it and then click Create
+
+![img_9.png](../images/3_tier_subnet/img_9.png)
+
+11. Create a DB instance from the DB image
+
+12. Make Sure to change Availability Zone to "Zone 3"
+
+![img_10.png](../images/3_tier_subnet/img_10.png)
+
+13. Change these settings in Networking
+- Virtual network 
+- Subnet
+- Change Public IP to NONE
+
+![img_11.png](../images/3_tier_subnet/img_11.png)
+
+14. Check Review + create and click Create
+
+![img_13.png](../images/3_tier_subnet/img_13.png)
+
+15. Create an App Instance from the App image
+
+16. Make Sure to change Availability Zone to "Zone 1"
+
+![img_16.png](../images/3_tier_subnet/img_16.png)
+
+17. Change these settings in Networking
+- Virtual network
+- Subnet
+- Public IP
+- Add HTTP(80) for Networking and Basics
+
+![img_17.png](../images/3_tier_subnet/img_17.png)
+
+18. Go to Advanced, Enable and Input the User Data, use the Private IP for the database
+
+User Data:
+```
+#!/bin/bash
+
+echo cd app folder
+cd /tech258-sparta-test-app/app
+echo done!
+
+echo set DB_HOST env var
+export DB_HOST=mongodb://10.0.4.4:27017/posts
+echo done!
+
+npm install
+
+pm2 kill
+
+echo start app
+pm2 start app.js app
+echo done!
+```
+
+![img_18.png](../images/3_tier_subnet/img_18.png)
+
+19. Check Review + Create and then click Create
+
+![img_19.png](../images/3_tier_subnet/img_19.png)
+
+20. Input the App Public IP Address/posts to check if its working at this point
+
+![img_20.png](../images/3_tier_subnet/img_20.png)
+
+21. Create a New Virutal Machine
+
+21. Input the Name, Change the Availability Zone and select Ubuntu 22.04 for the image.
+
+![img_21.png](../images/3_tier_subnet/img_21.png)
+
+22. Change these settings in Networking
+- Virtual network
+- Subnet
+- Public IP
+
+![img_22.png](../images/3_tier_subnet/img_22.png)
+
+23. Check Review + Create and then click Create
+
+![img_23.png](../images/3_tier_subnet/img_23.png)
+
+24. Navigate to Route tables
+
+![img_24.png](../images/3_tier_subnet/img_24.png)
+
+25. Click Create
+![img_25.png](../images/3_tier_subnet/img_25.png)
+
+26. Input these settings
+
+![img_26.png](../images/3_tier_subnet/img_26.png)
+
+27. Input Tags
+
+![img_27.png](../images/3_tier_subnet/img_27.png)
+
+28. Check Review + Create and then click Create
+
+![img_28.png](../images/3_tier_subnet/img_28.png)
+
+29. Click on Resource, Then Settings, Then Routes
+
+![img_29.png](../images/3_tier_subnet/img_29.png)
+
+30. Click Add
+
+![img_30.png](../images/3_tier_subnet/img_30.png)
+
+31. Input
+- Route name
+- Destination type - IP Addresses
+- Destination IP Addresses/CIDR ranges (10.0.4.0/24)
+- Next hop type (Virtual appliance)
+- Next hop address (10.0.3.4)
+
+Then Click Add
+
+![img_31.png](../images/3_tier_subnet/img_31.png)
+
+32. Navigate to subnets and clcik Associate
+
+![img_32.png](../images/3_tier_subnet/img_32.png)
+
+33. Choose the Virtual network and Subnet and click Ok
+
+![img_33.png](../images/3_tier_subnet/img_33.png)
+
+34. Navigate to the NVA instance, Click Network Settings and select the Network Interface
+
+![img_34.png](../images/3_tier_subnet/img_34.png)
+
+35. Select Enable IP forwarding and click Apply
+
+![img_35.png](../images/3_tier_subnet/img_35.png)
+
+36. Navigate to the NVA VM and connect via SSH
+
+![img_36.png](../images/3_tier_subnet/img_36.png)
+
+![img_37.png](../images/3_tier_subnet/img_37.png)
+
+37. Now Run these 2 commands
+- `sudo apt update -y`
+- `sudo apt upgrade -y`
+
+38. Use this `sysctl net.ipv4.ip_forward` command to check if its forwarding
+- 0 for No
+- 1 for Yes
+
+![img_38.png](../images/3_tier_subnet/img_38.png)
+
+39. Use this command `sudo nano /etc/sysctl.conf` and remove # from the forwarding line
+
+![img_39.png](../images/3_tier_subnet/img_39.png)
+
+40. Save the document
+
+50. Run `sudo sysctl -p` to restart 
+
+![img_40.png](../images/3_tier_subnet/img_40.png)
+
+51. Next create a script using `nano ip_forward.sh`
+
+52. Inside the Script use this code
+
+**ip_forward.sh:**
+```
+#!/bin/bash
+
+# configure iptables
+
+echo "Configuring iptables..."
+
+# Allow loopback traffic
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A OUTPUT -o lo -j ACCEPT
+
+# Allow established and related incoming connections
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Allow established outgoing connections
+sudo iptables -A OUTPUT -m state --state ESTABLISHED -j ACCEPT
+
+# Drop invalid incoming packets
+sudo iptables -A INPUT -m state --state INVALID -j DROP
+
+# Allow SSH incoming and outgoing connections
+sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+
+# Allow SSH into NVA only through the public subnet (app VM as a jumpbox)
+# Must be done once the NVA's public IP address is removed
+#sudo iptables -A INPUT -p tcp -s 10.0.2.0/24 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+#sudo iptables -A OUTPUT -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+
+# Allow SSH to other servers using the NVA as a jumpbox
+# If need to make outgoing SSH connections with other servers from NVA
+#sudo iptables -A OUTPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+#sudo iptables -A INPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+# Allow MongoDB traffic from public subnet to private subnet
+sudo iptables -A FORWARD -p tcp -s 10.0.2.0/24 -d 10.0.4.0/24 --destination-port 27017 -m tcp -j ACCEPT
+
+# Allow ICMP traffic from public subnet to private subnet
+sudo iptables -A FORWARD -p icmp -s 10.0.2.0/24 -d 10.0.4.0/24 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# Drop all other incoming and forwarding traffic by default
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+
+echo "Done!"
+echo ""
+
+# make iptables rules persistent
+# it will ask for user input by default
+
+echo "Make iptables rules persistent..."
+sudo DEBIAN_FRONTEND=noninteractive apt install iptables-persistent -y
+echo "Done!"
+echo ""
+
+```
+
+![img_42.png](../images/3_tier_subnet/img_42.png)
+
+53. Add Execute permissions to the File and Run it
+- `sudo chmod +x ip_forward.sh`
+- `./ip_forward.sh`
+
+![img_43.png](../images/3_tier_subnet/img_43.png)
+
+54. Check if its running
+
+![img_44.png](../images/3_tier_subnet/img_44.png)
+
+### Update NSG rules to make the Private Subnet Stricter
+
+![img_45.png](../images/3_tier_subnet/img_45.png)
