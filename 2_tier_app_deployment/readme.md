@@ -35,8 +35,13 @@ This guide outlines the steps to deploy a 2-tier application on Microsoft Azure.
   - [Autoscaling Groups](#autoscaling-groups)
     - [Understanding Virtual Machine Scale Sets (VMSS)](#understanding-virtual-machine-scale-sets-vmss)
   - [Steps to Create an Autoscale group](#steps-to-create-an-autoscale-group)
-  - [How to SSH into scale set instance](#how-to-ssh-into-scale-set-instance)
+  - [Reimage And Upgrade (If the Userdata is modified)](#reimage-and-upgrade-if-the-userdata-is-modified)
+  - [Scale Set Instance Health](#scale-set-instance-health)
+  - [How to SSH into Scale Set Instance](#how-to-ssh-into-scale-set-instance)
   - [How to Delete Scale Set](#how-to-delete-scale-set)
+  - [Making the Database Private (Azure)](#making-the-database-private-azure)
+  - [How to create the 3-subnet architecture (Private Database)](#how-to-create-the-3-subnet-architecture-private-database)
+    - [Update NSG rules to make the Private Subnet Stricter](#update-nsg-rules-to-make-the-private-subnet-stricter)
 
 
 ## SSH Key
