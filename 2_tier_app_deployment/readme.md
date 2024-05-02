@@ -838,6 +838,19 @@ Extra Info: Default is now called initial
 
 ![img_1.png](../images/autoscale_group/img_1.png)
 
+**High Availability:**
+
+In a 2-tier architecture, the frontend tier typically handles client requests and the backend tier processes data. By distributing both tiers across multiple VM instances within a VMSS, high availability is achieved.
+If one frontend or backend VM instance fails, the load balancer redirects traffic to other healthy instances, ensuring continuous availability of the application.
+Additionally, by utilizing Availability Zones, VM instances from both tiers can be spread across different data centers within the same region, enhancing fault tolerance and ensuring that the application remains accessible even in the event of a data center failure.
+
+**Scalability:**
+
+VMSS facilitates scalability by automatically adjusting the number of VM instances in both the frontend and backend tiers based on workload demand.
+As the number of client requests increases, VMSS dynamically adds more frontend instances to handle the increased traffic, ensuring responsiveness and optimal user experience.
+Similarly, as the backend tier processes data from frontend requests, VMSS scales out the number of backend instances to distribute the processing load efficiently, maintaining the application's performance under heavy workloads.
+Scaling policies, such as those based on CPU utilization or incoming request rate, can be configured to automate the scaling process, allowing the architecture to adapt seamlessly to changing workload conditions while optimizing resource utilization and cost efficiency.
+
 ## Steps to Create an Autoscale group
 
 Extra Info: Load Balancer has an IP address
