@@ -1110,14 +1110,15 @@ The described 2-tier architecture on Azure with an App and a Database offers the
 ![img_4.png](../images/3_tier_subnet/img_4.png)
 
 6. Change Name to "public-subnet" and Starting address to "10.0.2.0" and click Add
-
+   (This is the creation of the public-subnet that would hold the app)
 ![img_5.png](../images/3_tier_subnet/img_5.png)
 
 7. Then Click Add a Subnet and input "dmz-subnet" for the name and "10.0.3.0" for the Starting address and click Add
-
+   (This is the creation of the dmz-subnet that would hold the NVA, which acts as a firewall)
 ![img_6.png](../images/3_tier_subnet/img_6.png)
 
 8. Then Click Add A Subnet and input "private-subnet" for the name and "10.0.4.0" for the Starting address
+   (This is the creation of the public-subnet that would hold the app)
 
 ![img_7.png](../images/3_tier_subnet/img_7.png)
 
@@ -1270,7 +1271,7 @@ Then Click Add
 
 ![img_37.png](../images/3_tier_subnet/img_37.png)
 
-37. Now Run these 2 commands
+37. Now Run these 2 commands (This should be the first commands you run)
 - `sudo apt update -y`
 - `sudo apt upgrade -y`
 
@@ -1367,3 +1368,13 @@ echo ""
 ### Update NSG rules to make the Private Subnet Stricter
 
 ![img_45.png](../images/3_tier_subnet/img_45.png)
+
+
+
+
+
+
+
+
+
+
