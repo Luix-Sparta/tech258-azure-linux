@@ -1211,7 +1211,7 @@ echo done!
 ![img_23.png](../images/3_tier_subnet/img_23.png)
 
 24. Navigate to Route tables
-
+The Route table instructs traffic from the public subnet to pass through the NVA before reaching the private subnet.
 ![img_24.png](../images/3_tier_subnet/img_24.png)
 
 25. Click Create
